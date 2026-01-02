@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altametrics Project - Full Build</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --alt-dark-blue: #0d1b2a;
+            --alt-blue: #1a73e8;
+            --alt-bg: #f5f7fa;
+            --border-light: #e0e6ed;
+        }
+
+        body { margin: 0; font-family: 'Roboto', sans-serif; background-color: var(--alt-bg); color: #333; overflow-x: hidden; }
+        .hidden { display: none !important; }
+
+        /* PERSISTENT HEADER */
+        .main-header { background: var(--alt-dark-blue); color: white; height: 50px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; z-index: 1000; position: relative; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .corp-dropdown { background: white; color: #333; padding: 5px 15px; border-radius: 20px; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .profile-img { width: 32px; height: 32px; border-radius: 50%; background: #ccc; border: 1px solid white; }
+
+        /* BANNER & SEARCH (SCREEN 2) */
+        .banner { background: linear-gradient(to right, #89b4f7, #69a1ef); height: 80px; margin: 10px; border-radius: 5px; display: flex; align-items: center; padding-left: 30px; }
+        .search-bar-wrap { background: white; border-radius: 30px; display: flex; align-items: center; padding: 5px 15px; border: 1px solid #dcdcdc; max-width: 850px; margin: -25px auto 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .search-bar-wrap input { border: none; outline: none; flex: 1; padding: 10px; font-size: 14px; }
+        .gear-trigger { width: 34px; height: 34px; background: #1a73e8; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; font-size: 18px; }
+        
+        /* GRIDS & LAYOUT */
+        .container { padding: 20px 40px; }
+        .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .manage-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+
+        /* MANAGE ACCOUNT CARDS (SCREEN 3) */
+        .manage-card { background: white; border-radius: 12px; padding: 25px 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); cursor: pointer; transition: 0.2s; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .manage-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+        .manage-card img { width: 85px; height: 85px; margin-bottom: 20px; object-fit: contain; }
+        .manage-card span { font-size: 14px; color: #444; font-weight: 400; }
+
+        /* MY ORGANIZATION ITEMS (SCREEN 4) */
+        .org-items-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
+        .org-box { background: white; border: 1px solid #eee; border-radius: 8px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s; }
+        .org-box:hover { border-color: var(--alt-blue); }
+        .org-box.active { border: 1.5px solid var(--alt-blue); box-shadow: 0 0 8px rgba(26, 115, 232, 0.1); }
+        .org-icon-sq { width: 48px; height: 48px; background: #f8f9fa; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+        .org-icon-sq img { width: 32px; height: 32px; object-fit: contain; }
+
+        /* SIDEBAR HELP */
+        .help-side { position: fixed; left: 0; bottom: 15%; background: var(--alt-blue); color: white; padding: 12px 6px; border-radius: 0 10px 10px 0; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; cursor: pointer; z-index: 999; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div style="font-weight: bold; font-size: 18px;">Altametrics <span style="font-weight: 300; font-size: 12px;">GROWTH</span></div>
+        <div class="nav-right">
+            <div id="nav-apps" class="hidden" style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">
+                <span style="font-size:18px;">⠿</span> My Apps ▾
+            </div>
+            <div class="corp-dropdown">
+                <span style="color:var(--alt-blue)">🏪</span> Corporate Head ▾
+            </div>
+            <div class="profile-img"></div>
+        </div>
+    </header>
+
+    <div id="view-port">
+
+        <section id="scr-franchise">
+            <div style="background:white; padding:15px 40px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:10px;"><div style="background:#69f0ae; width:30px; height:30px; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold;">PO</div> Priyansh's Organization</div>
+                <h3 style="position:absolute; left:50%; transform:translateX(-50%); font-weight:400;">Franchise Groups</h3>
+                <div style="border:1px solid #ddd; border-radius:4px; display:flex;"><input type="text" placeholder="Search..." style="border:none; padding:8px;"></div>
+            </div>
+            <div class="container app-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                <div class="manage-card" style="background:#e8e0e6; flex-direction:row; min-height:auto; padding:15px; justify-content:flex-start;" onclick="move('scr-dashboard')">
+                    <div style="background:#9b7d8d; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-right:15px; font-weight:bold;">CH</div>
+                    <div style="text-align:left;"><strong>Corporate Head</strong><br><small>vgjhy</small></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="scr-dashboard" class="hidden">
+            <div class="banner">📢</div>
+            <div class="search-bar-wrap">
+                <span style="color:var(--alt-blue); font-weight:bold; font-size:13px;">⠿ My Apps</span> &nbsp; | &nbsp; <span>Integrations</span>
+                <input type="text" placeholder="Type to search your apps here...">
+                <button class="gear-trigger" onclick="move('scr-manage')">⚙️</button>
+            </div>
+            <div class="container">
+                <p style="font-size: 18px; font-weight: 300;">Welcome, <span style="color:var(--alt-blue); font-weight:400;">Priyansh</span> <span style="float:right; font-size:12px; color:#999;">Friday, Jan 02, 2026</span></p>
+                <div class="app-grid">
+                    <div class="manage-card" style="min-height:140px; padding:15px;"><span style="font-size:30px">🛒</span><strong>App Store</strong></div>
+                    <div class="manage-card" style="min-height:140px; padding:15px; background:#4da3ff; color:white;"><span style="font-size:30px">📅</span><strong>Zip Schedules</strong></div>
+                    <div class="manage-card" style="min-height:140px; padding:15px; background:#5da9f6; color:white;"><span style="font-size:30px">🕒</span><strong>Zip Clock</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="scr-manage" class="hidden">
+            <div style="background:white; padding:10px 40px; font-size:12px; color:var(--alt-blue); border-bottom:1px solid #eee;">Manage Account</div>
+            <h2 style="text-align:center; font-weight:400; margin: 40px 0;">Manage Account</h2>
+            <div class="container manage-grid">
+                <div class="manage-card" onclick="move('scr-org')">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/myOrg.svg" alt="My Org">
+                    <span>My Organization</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/sites.svg" alt="Sites">
+                    <span>Sites</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/App_Setting.svg" alt="App Settings">
+                    <span>App Settings</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/billing_sub.svg" alt="Billing">
+                    <span>Billing & Subscription</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/profile_setting.svg" alt="Profile">
+                    <span>Profile Settings</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/settingApp/franchise_grp.png" alt="Franchise">
+                    <span>Franchisee Groups</span>
+                </div>
+                <div class="manage-card">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/AdminUser.svg" alt="Admin">
+                    <span>Admin Users</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="scr-org" class="hidden">
+            <div style="background:white; padding:10px 40px; font-size:12px; border-bottom:1px solid #eee;">
+                <span style="color:var(--alt-blue); cursor:pointer;" onclick="move('scr-manage')">Manage Account</span> > <span style="color:#999">My Organization</span>
+            </div>
+            <div class="container">
+                <div style="font-weight: 500; font-size: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" width="20" alt="Icon"> My Organization
+                </div>
+                <div class="org-items-container">
+                    <div class="org-box">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" alt="Profile"></div>
+                        <div><strong>Organization Profile</strong><br><small>Set up your organization profile details.</small></div>
+                    </div>
+                    <div class="org-box">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organizationsetting.svg" alt="Settings"></div>
+                        <div><strong>Organization Settings</strong><br><small>Set up your organization preferences.</small></div>
+                    </div>
+                    <div class="org-box">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/svg/FormatSettings.svg" alt="Format"></div>
+                        <div><strong>Format Settings</strong><br><small>Set up your format for different organization elements.</small></div>
+                    </div>
+                    <div class="org-box">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipShiftbook/svg/managesiteleveluserprivilages.svg" alt="Privileges"></div>
+                        <div><strong>Manage User Privileges</strong><br><small>Manage User Privileges.</small></div>
+                    </div>
+
+                    <div class="org-box" onclick="window.open('https://tushsoni.github.io/WorkflowRoleWiseSetup/', '_blank')">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" alt="Workflow Role"></div>
+                        <div><strong>Workflow Role Wise Setup</strong><br><small>Configure workflow roles in new tab.</small></div>
+                    </div>
+                    <div class="org-box" onclick="window.open('https://tushsoni.github.io/WorkflowSummary/', '_blank')">
+                        <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organizationsetting.svg" alt="Workflow Template"></div>
+                        <div><strong>Workflow Organization Template</strong><br><small>Configure organization template in new tab.</small></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="help-side">🎧 Help</div>
+
+    <script>
+        function move(id) {
+            document.querySelectorAll('#view-port > section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+
+            const navApps = document.getElementById('nav-apps');
+            if(id === 'scr-franchise') {
+                navApps.classList.add('hidden');
+            } else {
+                navApps.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
