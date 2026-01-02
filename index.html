@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow Organization Settings</title>
+    <title>Altametrics Project - Full Build</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -39,22 +39,42 @@
         .manage-card img { width: 85px; height: 85px; margin-bottom: 20px; object-fit: contain; }
         .manage-card span { font-size: 14px; color: #444; font-weight: 400; }
 
-        /* MY ORGANIZATION ITEMS (SCREEN 4) */
-        .org-items-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
-        .org-box { background: white; border: 1px solid #eee; border-radius: 8px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s; }
-        .org-box:hover { border-color: var(--alt-blue); }
-        .org-box.active { border: 1.5px solid var(--alt-blue); box-shadow: 0 0 8px rgba(26, 115, 232, 0.1); }
-        .org-icon-sq { width: 48px; height: 48px; background: #f8f9fa; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
-        .org-icon-sq img { width: 32px; height: 32px; object-fit: contain; }
-
-        /* SIDEBAR HELP */
-        .help-side { position: fixed; left: 0; bottom: 15%; background: var(--alt-blue); color: white; padding: 12px 6px; border-radius: 0 10px 10px 0; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; cursor: pointer; z-index: 999; }
+        /* SCREEN 4 (MY ORGANIZATION) STYLES - EXACT MATCH TO SCREENSHOT */
+        .org-items-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .org-box { 
+            background: white; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            cursor: pointer; 
+            width: calc(25% - 10px); 
+            box-sizing: border-box;
+            min-width: 280px;
+        }
+        .org-icon-sq { 
+            width: 44px; 
+            height: 44px; 
+            border: 1px solid #eee; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0; 
+        }
+        .org-icon-sq img { width: 28px; height: 28px; }
+        .org-box strong { font-size: 13px; color: #333; display: block; }
+        .org-box small { font-size: 11px; color: #888; }
 
         /* DEMO KNOWLEDGE OVERLAY */
         .demo-guide { position: fixed; bottom: 20px; right: 20px; background: #fffde7; border-left: 5px solid #fbc02d; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2000; max-width: 300px; animation: slideIn 0.5s ease-out; }
         .demo-guide h4 { margin: 0 0 5px 0; color: #f57f17; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
         .demo-guide p { margin: 0; font-size: 13px; line-height: 1.4; color: #333; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .help-side { position: fixed; left: 0; bottom: 15%; background: var(--alt-blue); color: white; padding: 12px 6px; border-radius: 0 10px 10px 0; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; cursor: pointer; z-index: 999; }
     </style>
 </head>
 <body>
@@ -146,38 +166,39 @@
         </section>
 
         <section id="scr-org" class="hidden">
-            <div style="background:white; padding:10px 40px; font-size:12px; border-bottom:1px solid #eee;">
-                <span style="color:var(--alt-blue); cursor:pointer;" onclick="move('scr-manage')">Manage Account</span> > <span style="color:#999">My Organization</span>
+            <div style="background:white; padding:8px 20px; font-size:11px; border-bottom:1px solid #f0f0f0;">
+                <span style="color:#555; cursor:pointer;" onclick="move('scr-manage')">Manage Account</span> <span style="color:#888; margin: 0 5px;">&gt;</span> <span style="color:var(--alt-blue)">My Organization</span>
             </div>
-            <div class="container">
-                <div style="font-weight: 500; font-size: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" width="20" alt="Icon"> My Organization
+            <div style="background:white; padding:15px 20px; border-bottom:1px solid #f0f0f0; margin-bottom: 20px;">
+                <div style="font-weight: 500; font-size: 14px; color: #333; display: flex; align-items: center; gap: 10px;">
+                    <img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" width="18" alt="Icon"> My Organization
                 </div>
+            </div>
+            <div class="container" style="padding-top: 0;">
                 <div class="org-items-container">
                     <div class="org-box">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" alt="Profile"></div>
-                        <div><strong>Organization Profile</strong><br><small>Set up your organization profile details.</small></div>
+                        <div><strong>Organization Profile</strong><small>Set up your organization profile details.</small></div>
                     </div>
                     <div class="org-box">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organizationsetting.svg" alt="Settings"></div>
-                        <div><strong>Organization Settings</strong><br><small>Set up your organization preferences.</small></div>
+                        <div><strong>Organization Settings</strong><small>Set up your organization preferences.</small></div>
                     </div>
                     <div class="org-box">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/account/svg/FormatSettings.svg" alt="Format"></div>
-                        <div><strong>Format Settings</strong><br><small>Set up your format for different organization elements.</small></div>
+                        <div><strong>Format Settings</strong><small>Set up your format for different organization elements.</small></div>
                     </div>
                     <div class="org-box">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipShiftbook/svg/managesiteleveluserprivilages.svg" alt="Privileges"></div>
-                        <div><strong>Manage User Privileges</strong><br><small>Manage User Privileges.</small></div>
+                        <div><strong>Manage User Privileges</strong><small>Manage User Privileges.</small></div>
                     </div>
-
                     <div class="org-box" onclick="window.open('https://tushsoni.github.io/WorkflowRoleWiseSetup/', '_blank')">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organization.svg" alt="Workflow Role"></div>
-                        <div><strong>Workflow Role Wise Setup</strong><br><small>Configure workflow roles in new tab.</small></div>
+                        <div><strong>Workflow Role Wise Setup</strong><small>Configure workflow roles.</small></div>
                     </div>
                     <div class="org-box" onclick="window.open('https://tushsoni.github.io/WorkflowSummary/', '_blank')">
                         <div class="org-icon-sq"><img src="https://agcdn.altametrics.com/releaseHubWorks/agassets/v3/assets/images/zipSchedule/svg_imgs/Organizationsetting.svg" alt="Workflow Template"></div>
-                        <div><strong>Workflow Organization Template</strong><br><small>Configure organization template in new tab.</small></div>
+                        <div><strong>Workflow Organization Template</strong><small>Configure organization workflow template.</small></div>
                     </div>
                 </div>
             </div>
