@@ -49,6 +49,12 @@
 
         /* SIDEBAR HELP */
         .help-side { position: fixed; left: 0; bottom: 15%; background: var(--alt-blue); color: white; padding: 12px 6px; border-radius: 0 10px 10px 0; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; cursor: pointer; z-index: 999; }
+
+        /* DEMO KNOWLEDGE OVERLAY */
+        .demo-guide { position: fixed; bottom: 20px; right: 20px; background: #fffde7; border-left: 5px solid #fbc02d; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2000; max-width: 300px; animation: slideIn 0.5s ease-out; }
+        .demo-guide h4 { margin: 0 0 5px 0; color: #f57f17; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .demo-guide p { margin: 0; font-size: 13px; line-height: 1.4; color: #333; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -65,6 +71,11 @@
             <div class="profile-img"></div>
         </div>
     </header>
+
+    <div id="demo-overlay" class="demo-guide">
+        <h4>Demo Guide</h4>
+        <p id="demo-text">Click on the <strong>Corporate Head</strong> card to begin.</p>
+    </div>
 
     <div id="view-port">
 
@@ -182,10 +193,20 @@
             document.getElementById(id).classList.remove('hidden');
 
             const navApps = document.getElementById('nav-apps');
+            const demoText = document.getElementById('demo-text');
+
             if(id === 'scr-franchise') {
                 navApps.classList.add('hidden');
-            } else {
+                demoText.innerHTML = "Click on the <strong>Corporate Head</strong> card to begin.";
+            } else if(id === 'scr-dashboard') {
                 navApps.classList.remove('hidden');
+                demoText.innerHTML = "Click on the <strong>Settings (⚙️)</strong> icon in the search bar.";
+            } else if(id === 'scr-manage') {
+                navApps.classList.remove('hidden');
+                demoText.innerHTML = "Click on the <strong>My Organization</strong> tab.";
+            } else if(id === 'scr-org') {
+                navApps.classList.remove('hidden');
+                demoText.innerHTML = "Click on <strong>Workflow Role Wise Setup</strong> and <strong>Workflow Organization Template</strong>.";
             }
         }
     </script>
